@@ -12,6 +12,8 @@ import { StyleSheet, Text, TextInput, View, Pressable, Button, Modal, TouchableO
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SelectDropdown from 'react-native-select-dropdown';
 
+import EditTaskForm from '../components/EditTaskForm';
+
 // Home Page of the task manager application
 const HomePage = () =>{
   // to set the visibility of the add task pop up form
@@ -63,8 +65,6 @@ const HomePage = () =>{
       newTickVisible[taskId] = true;
       setTickVisible(newTickVisible);
     }
-    // console.log(checkList);
-    // console.log(tickVisible);
   }
 
   // handle task modification //
@@ -105,6 +105,9 @@ const HomePage = () =>{
             tickVisible[i] === false && (
               <Pressable key={i}
                   style={styles.taskView}
+                  accessible={true}
+                  accessibilityLabel='task pressable'
+                  onPress={() => handleTimeFrame(i)}
               >
                 {/* task's title */}
                 <Text style={styles.checkListText}>{task[0]}</Text>
@@ -115,11 +118,12 @@ const HomePage = () =>{
                 </TouchableOpacity>
 
                 {/* checkbox button*/}
-                <TouchableOpacity style={styles.checkBox} onPress={()=> handleCheckBox(i)}>
-                  {/* if the state is true then the tick will be visible */}
-                  {tickVisible[i] && (
-                    <MaterialCommunityIcons name='check' size={15}/>
-                  )}
+                <TouchableOpacity 
+                  style={styles.checkBox} 
+                  accessible={true}
+                  accessibilityLabel='uncheck box button'
+                  onPress={()=> handleCheckBox(i)} 
+                >
                 </TouchableOpacity>
               </Pressable>
             )
@@ -139,11 +143,17 @@ const HomePage = () =>{
               >
                 <Text style={styles.checkListText}>{task[0]}</Text>
                 <Text style={styles.checkListText}>{task[1]}</Text>
+
                 {/* checkbox button*/}
-                <TouchableOpacity style={styles.checkBox} onPress={()=> handleCheckBox(i)}>
+                <TouchableOpacity 
+                  style={styles.checkBox} 
+                  accessible={true}
+                  accessibilityLabel='checked box button'
+                  onPress={()=> handleCheckBox(i)}
+                >
                   {/* if the state is true then the tick will be visible */}
                   {tickVisible[i] && (
-                    <MaterialCommunityIcons name='check' size={15}/>
+                    <MaterialCommunityIcons name='check' accessible={true} accessibilityLabel='check icon' size={15}/>
                   )}
                 </TouchableOpacity>
               </Pressable>
@@ -157,16 +167,18 @@ const HomePage = () =>{
             <Modal 
                 visible={formVisible}
                 transparent={true}
+                accessible={true}
+                accessibilityLabel='Add Task Pop-up Form'
                 onRequestClose={() => {
                     setFormVisible(!formVisible);
             }}>
                 <View style={styles.formView}>
                     <View style={styles.formContainer}>
                         <TextInput 
-                            placeholder='Title'
-                            style= {styles.textInputContainer}
-                            maxLength= {20}
-                            onChangeText= {titleText => setTitleText(titleText)}
+                          placeholder='Title'
+                          style= {styles.textInputContainer}
+                          maxLength= {20}
+                          onChangeText= {titleText => setTitleText(titleText)}
                         />
                         {/* <TextInput 
                             placeholder='Description'
@@ -192,12 +204,14 @@ const HomePage = () =>{
 
                         {/* Button to save and add in new task to the list */}
                         <Button title='Save'
-                            onPress={()=> handleNewTask(titleText, timeFrame)}
+                          accessible={true}
+                          accessibilityLabel='Save New Task Button'
+                          onPress={()=> handleNewTask(titleText, timeFrame)}
                         />
                         {/* Button to cancel the action of trying to add new task */}
                         <Button title='Cancel'
-                            onPress={()=> setFormVisible(false)}
-                            color={'red'}
+                          onPress={()=> setFormVisible(false)}
+                          color={'red'}
                         />
                     </View>
                 </View>
@@ -205,60 +219,30 @@ const HomePage = () =>{
 
             {/* add task button to show the pop up form */}
             <Pressable
-                onPress={()=> setFormVisible(true)}
-                style = {styles.popUpButton}
+              accessible={true}
+              accessibilityLabel='Add Task Button'
+              onPress={()=> setFormVisible(true)}
+              style = {styles.popUpButton}
             >
-                <Text style={styles.popUpButtonText}>
-                    Add Task
-                </Text>
+              <Text style={styles.popUpButtonText}>
+                AddTask
+              </Text>
             </Pressable>
         </View>
 
         {/* pop-up form to enable the user to edit the task */}
-        <View>
-          <Modal 
-              visible={editFormVisible}
-              transparent={true}
-              onRequestClose={() => {
-                  setEditFormVisible(!editFormVisible);
-          }}>
-              <View style={styles.formView}>
-                  <View style={styles.formContainer}>
-                      <TextInput 
-                          placeholder= {editFormInfo[0]}
-                          style= {styles.textInputContainer}
-                          maxLength= {20}
-                          onChangeText= {titleText => setTitleText(titleText)}
-                      />
-                      {/* timeframe feature */}
-                      <SelectDropdown 
-                        data={timeFrames}
-                        defaultButtonText= {editFormInfo[1]}
-                        // the time on the selection box after the user has selected a time from the list
-                        buttonTextAfterSelection={(selectedTime, i) => {
-                          return selectedTime;
-                        }}
-                        // present rows of time for user selection that was taken from the timeframes data array
-                        rowTextForSelection={(time, i) => {
-                          return time;
-                        }}
-                        // when the time was selected by the user 
-                        onSelect={(selectedTime, i) => setTimeFrame(selectedTime)}
-                      />
-
-                      {/* Button to save and add in new task to the list */}
-                      <Button title='Save'
-                          onPress={()=> handleModTask(titleText, timeFrame)}
-                      />
-                      {/* Button to cancel the action of trying to add new task */}
-                      <Button title='Cancel'
-                          onPress={()=> setEditFormVisible(false)}
-                          color={'red'}
-                      />
-                  </View>
-              </View>
-          </Modal>
-        </View>
+        <EditTaskForm 
+          editFormVisible={editFormVisible} 
+          setEditFormVisible={setEditFormVisible} 
+          titleText={titleText} 
+          setTitleText={setTitleText}
+          timeFrame={timeFrame}
+          setTimeFrame={setTimeFrame} 
+          timeFrames={timeFrames}
+          editFormInfo={editFormInfo}
+          checkList={checkList}
+          editIndex={editIndex}
+        />
     </View>
   );
 }

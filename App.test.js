@@ -7,6 +7,7 @@ import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react-native';
 import App from './App';
 
+// testing on user interaction on App.js
 // this is to test whether the bottom navigation buttons works as expected //
 // this is to test Home Tab Bar
 test('Home Bottom Navigation Tab navigate to home page correctly', () => {
@@ -42,7 +43,6 @@ test('Profile Bottom Navigation Tab navigate to profile page correctly', () => {
     // checks whether after pressing the button will lead to the Profile Page or not
     expect(getByLabelText('Profile Page View')).toBeTruthy();
 })
-
 
 // test('TextComponent renders correctly', () => {
 //     const { getByText } = render(<ProfilePage />);

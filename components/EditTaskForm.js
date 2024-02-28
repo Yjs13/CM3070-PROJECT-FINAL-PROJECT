@@ -5,7 +5,7 @@
 import { StyleSheet, TextInput, View, Button, Modal } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 
-const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText,timeFrame,setTimeFrame,timeFrames,editFormInfo,checkList,editIndex}) =>{
+const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText,priority,setPriority,priorities,editFormInfo,checkList,editIndex}) =>{
     // handle task modification //
     // when the user save a modified task
     const handleModTask = (task, time) =>{
@@ -18,7 +18,6 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
         <View>
             <Modal 
                 visible={editFormVisible}
-                transparent={true}
                 onRequestClose={() => {
                     setEditFormVisible(!editFormVisible);
             }}>
@@ -26,30 +25,31 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
                     <View style={styles.formContainer}>
                         {/* task title input box */}
                         <TextInput 
-                            placeholder= {editFormInfo[0]}
+                            // placeholder= {editFormInfo[0]}
+                            defaultValue={editFormInfo[0]}
                             style= {styles.textInputContainer}
                             maxLength= {20}
                             onChangeText= {titleText => setTitleText(titleText)}
                         />
-                        {/* timeframe feature */}
+                        {/* priority feature */}
                         <SelectDropdown 
-                            data={timeFrames}
+                            data={priorities}
                             defaultButtonText= {editFormInfo[1]}
                             // the time on the selection box after the user has selected a time from the list
                             buttonTextAfterSelection={(selectedTime, i) => {
                             return selectedTime;
                             }}
-                            // present rows of time for user selection that was taken from the timeframes data array
+                            // present rows of time for user selection that was taken from the priorities data array
                             rowTextForSelection={(time, i) => {
                             return time;
                             }}
                             // when the time was selected by the user 
-                            onSelect={(selectedTime, i) => setTimeFrame(selectedTime)}
+                            onSelect={(selectedTime, i) => setPriority(selectedTime)}
                         />
 
                         {/* Button to save and add in new task to the list */}
                         <Button title='Save'
-                            onPress={()=> handleModTask(titleText, timeFrame)}
+                            onPress={()=> handleModTask(titleText, priority)}
                         />
                         {/* Button to cancel the action of trying to add new task */}
                         <Button title='Cancel'
@@ -65,21 +65,20 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
 
 const styles = StyleSheet.create({
     formView: {
-        flex: 1,
-        justifyContent: 'center',
+        
     },
     formContainer: {
-        margin: '10%',
         padding: '5%',
+        paddingTop: '8%',
         backgroundColor: 'white',
-        borderWidth: 2,
     },
     //  textInput styling
     textInputContainer:
     {
         padding: 5,
         marginBottom: 8, 
-        borderWidth: 1,
+        fontSize: 25,
+        fontWeight: 'bold',
     },
 });
 

@@ -17,7 +17,8 @@
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-select-dropdown": "^3.4.0",
-    "react-native-vector-icons": "^10.0.3"
+    "react-native-vector-icons": "^10.0.3",
+    "@react-native-community/datetimepicker": "7.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

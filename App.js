@@ -1,7 +1,6 @@
 // bottom navigation to allow user to navigate around the main pages of the app
-// reference from React Native for the bottom navigation and icons
-// https://reactnavigation.org/docs/bottom-tab-navigator/
-// import { StatusBar } from 'expo-status-bar';
+// Adapt from React Native for the bottom navigation and icons
+// https://reactnavigation.org/docs/bottom-tab-navigator/ (20 Feb 2024)
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

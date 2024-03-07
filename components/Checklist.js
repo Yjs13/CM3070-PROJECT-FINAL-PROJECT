@@ -1,39 +1,98 @@
 // checklist component in the home page
 // https://reactnative.dev/docs/touchableopacity
 // https://reactnative.dev/docs/pressable
+// https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
+import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInfo,setEditIndex,setTitleText,setPriority,checkList}) =>{
+const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInfo,setEditIndex,setTitleText,setPriority,checkList,setCheckList,setMainDueDate,taskAllInfo,setTaskAllInfo,setTimeFrame,setDescpText}) =>{
+
   // handle the checkBox
-  const handleCheckBox= (taskId) =>{
+  const handleCheckBox= async(taskId) =>{
     // when the checkBox was pressed by the user the tick will appear
     // enable click and unclick the checkbox
     if(tickVisible[taskId] == true)
     {
-        const newTickVisible = [...tickVisible];
-        newTickVisible[taskId] = false;
-        setTickVisible(newTickVisible);
+        // const newTickVisible = [...tickVisible];
+        // newTickVisible[taskId] = false;
+
+        // retrieve the tick data from the storage
+        const existTickData = await AsyncStorage.getItem('ticks');
+        const parsedTickData = JSON.parse(existTickData);
+        // modify the tick state of the checklist task to false
+        parsedTickData[taskId] = false;
+        // saved the new value back into the storage
+        await AsyncStorage.setItem('ticks', JSON.stringify(parsedTickData));
+
+        const savedTickData = await AsyncStorage.getItem('ticks');
+        const parsedData = JSON.parse(savedTickData);
+        setTickVisible(parsedData);
+        // setTickVisible(newTickVisible);
     }
     else if(tickVisible[taskId] == false)
     {
-        const newTickVisible = [...tickVisible];
-        newTickVisible[taskId] = true;
-        setTickVisible(newTickVisible);
+        // const newTickVisible = [...tickVisible];
+        // newTickVisible[taskId] = true;
+
+        // retrieve the tick data from the storage
+        const existTickData = await AsyncStorage.getItem('ticks');
+        const parsedTickData = JSON.parse(existTickData);
+        // modify the tick state of the checklist task to true
+        parsedTickData[taskId] = true;
+        // saved the new value back into the storage
+        await AsyncStorage.setItem('ticks', JSON.stringify(parsedTickData));
+
+        const savedTickData = await AsyncStorage.getItem('ticks');
+        const parsedData = JSON.parse(savedTickData);
+        setTickVisible(parsedData);
+        // setTickVisible(newTickVisible);
     }
   }
 
   // handle task modification //
-  // when the user pressed the priority button
-  const handlePriority = (i) =>{
+  // when the user pressed the whole checklist or priority button
+  const handleTaskInfoView = async(i) =>{
     setEditFormVisible(true);
     setEditFormInfo(checkList[i]);
     setEditIndex(i);
-    // set the selected task title and priority to the useState
+    // set the selected task info to the useState
     // this is to make sure if the user does not want to modify the selected task 
     // the task information will remain the same
     setTitleText(checkList[i][0]);
     setPriority(checkList[i][1]);
+    // set the storage saved string value to date format
+    setMainDueDate(new Date(checkList[i][2]));
+    // setTaskAllInfo(parsedAllTaskData);
+
+    // checks whether the task extra info(timeframe, description) was set by the user for the selected task
+    // if(taskAllInfo !== undefined && taskAllInfo !== null && taskAllInfo.length == i)
+    if(taskAllInfo[i] !== undefined && taskAllInfo[i] !== null)
+    {
+        const savedAllTaskData = await AsyncStorage.getItem('taskInfo');
+        const parsedAllTaskData = JSON.parse(savedAllTaskData);
+        // set the timeframe info to the task and show it in the edit task form
+        // setTimeFrame(taskAllInfo[i][3]);
+        setTimeFrame(parsedAllTaskData[i][3]);
+        setDescpText(taskAllInfo[i][4]);
+    }
+    else
+    {
+        setTimeFrame('Timeframe');
+        setDescpText('');
+    }
+    // if(taskAllInfo[i] !== undefined)
+    // {
+    //     // set the timeframe info to the task and show it in the edit task form
+    //     setTimeFrame(taskAllInfo[i][3]);
+    //     setDescpText(taskAllInfo[i][4]);
+    // }
+    // else
+    // {
+    //     setTimeFrame('Timeframe');
+    //     setDescpText('');
+    // }
   }
 
   return (
@@ -41,6 +100,9 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
         {/* tasks checklist added by the user container*/}
         {/* not completed task list */}
         <View style={styles.checkListView}>
+            {/* the incompleted task title appear when there is a false found in the tickVisible state array */}
+            {tickVisible.some((tick) => !tick) && <Text style={styles.complTaskTitle}>Incompleted Task</Text>}
+
             {/* each task container */}
             {checkList.map((task, i) => (
                 // task will only appear on the list above when the tick is false
@@ -52,14 +114,14 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
                         style={styles.taskView}
                         accessible={true}
                         accessibilityLabel='task pressable'
-                        onPress={() => handlePriority(i)}
+                        onPress={() => handleTaskInfoView(i)}
                     >
                         {/* task's title */}
                         <Text style={styles.checkListText}>{task[0]}</Text>
 
                         {/* priority button, show selected time and enable user to edit the priority */}
-                        <TouchableOpacity style={styles.priorityButton} onPress={() => handlePriority(i)}>
-                            <Text style={styles.checkListText}>{task[1]}</Text>
+                        <TouchableOpacity style={styles.priorityButton} onPress={() => handleTaskInfoView(i)}>
+                            <Text style={styles.checkListText}>{task[1] ? task[1] : 'Priority'}</Text>
                         </TouchableOpacity>
 
                         {/* checkbox button*/}
@@ -129,7 +191,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     checkListText: {
-        fontSize: 20,
+        fontSize: 18,
     },
     // priority Button styling
     priorityButton: {
@@ -139,7 +201,7 @@ const styles = StyleSheet.create({
     },
     // checkbox styling
     checkBox: {
-        width: '7%',
+        width: '8%',
         justifyContent: 'center',
         alignItems:'center',
         borderWidth:1,

@@ -5,6 +5,7 @@ import { Button } from 'react-native';
 
 // homePage.js unit testing on user interaction
 // test on the add task button on the home page
+// component testing
 test('Add Task Pressable onPress callback is called when it is pressed', () => {
     const { getByLabelText } = render(<HomePage />);
     const pressableElement = getByLabelText('Add Task Button');

@@ -80,7 +80,7 @@ const CalendarPage = () =>{
       />
       <View>
         {dayTask.map((task, i) => (
-          <Pressable style={styles.dayTaskView} key={i}>
+          <Pressable style={styles.dayTaskView} key={i} accessible={true} accessibilityLabel='Calendar Page Task View'>
             <Text style={styles.dayTaskTitle}>{task[0]}</Text>
             <Text style={styles.dayTaskPrio}>{task[1]}</Text>
           </Pressable>

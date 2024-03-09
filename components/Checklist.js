@@ -195,9 +195,13 @@ const styles = StyleSheet.create({
     },
     // priority Button styling
     priorityButton: {
-        paddingHorizontal: 5,
+        paddingVertical: 4,
+        paddingHorizontal: 7,
         backgroundColor: '#00BFFF',
-        borderWidth: 1,
+        borderRightWidth: 2,
+        borderBottomWidth: 2,
+        borderRadius: 7,
+        borderColor: '#b9bcbf',
     },
     // checkbox styling
     checkBox: {

@@ -157,6 +157,8 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
                     {/* due date feature which sets the due date for the task */}
                     {/* would show a calendar for user to set the due date for the task */}
                     <Pressable 
+                        accessible={true}
+                        accessibilityLabel='Due Date Button'
                         onPress={()=>setDateVisible(true)}
                         style={styles.dueDateButton}
                     >
@@ -178,6 +180,14 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
                         accessibilityLabel='Save New Task Button'
                         onPress={()=> handleNewTask(titleText, priority)}
                     />
+                    {/* <Pressable 
+                        accessible={true}
+                        accessibilityLabel='Save New Task Button'
+                        onPress={()=> handleNewTask(titleText, priority)}
+                        style={styles.dueDateButton}
+                    >
+                        <Text>Save</Text>
+                    </Pressable> */}
                     {/* Button to cancel the action of trying to add new task */}
                     <Button title='Cancel'
                         accessible={true}

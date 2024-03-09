@@ -121,6 +121,8 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
         <View>
             <Modal 
                 visible={editFormVisible}
+                accessible={true}
+                accessibilityLabel='Edit Task Pop-up Form'
                 onRequestClose={() => {
                     setEditFormVisible(!editFormVisible);
             }}>

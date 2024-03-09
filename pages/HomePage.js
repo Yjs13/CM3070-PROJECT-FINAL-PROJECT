@@ -81,19 +81,19 @@ const HomePage = () =>{
     getSavedCheckList();
   }, [])
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('checklist');
-      console.log(jsonValue != null ? JSON.parse(jsonValue) : null);
-      const tickState = await AsyncStorage.getItem('ticks');
-      console.log(tickState != null ? JSON.parse(tickState) : null);
-      const taskAllData = await AsyncStorage.getItem('taskInfo');
-      console.log(taskAllData != null ? JSON.parse(taskAllData) : null);
-      // await AsyncStorage.clear();
-    } catch (e) {
-      // error reading value
-    }
-  };
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem('checklist');
+  //     console.log(jsonValue != null ? JSON.parse(jsonValue) : null);
+  //     const tickState = await AsyncStorage.getItem('ticks');
+  //     console.log(tickState != null ? JSON.parse(tickState) : null);
+  //     const taskAllData = await AsyncStorage.getItem('taskInfo');
+  //     console.log(taskAllData != null ? JSON.parse(taskAllData) : null);
+  //     // await AsyncStorage.clear();
+  //   } catch (e) {
+  //     // error reading value
+  //   }
+  // };
 
   return (
     <View 
@@ -150,7 +150,7 @@ const HomePage = () =>{
                 Add Task
               </Text>
             </Pressable>
-            <Pressable
+            {/* <Pressable
               accessible={true}
               accessibilityLabel='Get Data'
               onPress={()=> getData()}
@@ -159,7 +159,7 @@ const HomePage = () =>{
               <Text style={styles.popUpButtonText}>
                 Get Data
               </Text>
-            </Pressable>
+            </Pressable> */}
         </View>
 
         {/* pop-up form to enable the user to edit the task */}

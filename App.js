@@ -10,6 +10,8 @@ import WelcomePage from './pages/WelcomePage';
 import SecurePageView from './pages/SecurePage';
 import BottomTab from './components/BottomNavigation';
 import SetupPassword from './components/SetUpPassword';
+import Authentication from './components/Authentication';
+import ForgetPass from './components/ForgetPassword';
 
 const Stack = createStackNavigator();
 
@@ -18,8 +20,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Welcome'>
         <Stack.Screen name='Welcome' component={WelcomePage} options={{headerShown:false}}/>
-        <Stack.Screen name='Secure' component={SecurePageView}/>
-        <Stack.Screen name='Setup Password' component={SetupPassword}/>
+        <Stack.Screen name='Secure' component={SecurePageView} options={{headerTitle:'Secure Page'}}/>
+        <Stack.Screen name='Setup Password' component={SetupPassword} options={{headerTintColor: '#800080',headerStyle: {backgroundColor: '#fbeed7'}}}/>
+        <Stack.Screen name='Authentication' component={Authentication}/>
+        <Stack.Screen name='Forget Password' component={ForgetPass} options={{headerTintColor: '#800080',headerStyle: {backgroundColor: '#fbeed7'}}}/>
         <Stack.Screen name='BottomTab' component={BottomTab} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>

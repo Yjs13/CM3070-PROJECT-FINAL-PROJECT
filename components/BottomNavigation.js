@@ -2,7 +2,6 @@
 // Adapt from React Native for the bottom navigation and icons
 // https://reactnavigation.org/docs/bottom-tab-navigator/ (20 Feb 2024)
 import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 

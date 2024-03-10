@@ -174,27 +174,29 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
                         />
                     )}
 
-                    {/* Button to save and add in new task to the list */}
-                    <Button title='Save'
-                        accessible={true}
-                        accessibilityLabel='Save New Task Button'
-                        onPress={()=> handleNewTask(titleText, priority)}
-                    />
-                    {/* <Pressable 
-                        accessible={true}
-                        accessibilityLabel='Save New Task Button'
-                        onPress={()=> handleNewTask(titleText, priority)}
-                        style={styles.dueDateButton}
-                    >
-                        <Text>Save</Text>
-                    </Pressable> */}
-                    {/* Button to cancel the action of trying to add new task */}
-                    <Button title='Cancel'
-                        accessible={true}
-                        accessibilityLabel='Cancel New Task Button'
-                        onPress={()=> handleCancelTask()}
-                        color={'red'}
-                    />
+                    <View style={styles.buttonView}>
+                        {/* Button to save and add in new task to the list */}
+                        <Pressable 
+                            accessible={true}
+                            accessibilityLabel='Save New Task Button'
+                            style={styles.buttonSave} 
+                            onPress={()=> handleNewTask(titleText, priority)}
+                        >
+                            <Text style={styles.buttonBoxText}>
+                                Save
+                            </Text>
+                        </Pressable>
+                        <Pressable 
+                            accessible={true}
+                            accessibilityLabel='Cancel New Task Button'
+                            style={styles.buttonCancel} 
+                            onPress={()=> handleCancelTask()}
+                        >
+                            <Text style={styles.buttonBoxText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
         </Modal>
@@ -212,6 +214,7 @@ const styles = StyleSheet.create({
         padding: '5%',
         backgroundColor: 'white',
         borderWidth: 2,
+        borderRadius: 5,
     },
     //  textInput styling
     textInputContainer:
@@ -253,6 +256,35 @@ const styles = StyleSheet.create({
     {
       fontSize: 16,
     },
+
+    // save and cancel button styling
+    buttonView:
+    {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    buttonSave:
+    {
+        width: '40%',
+        padding:5,
+        backgroundColor: 'blue',
+        borderRadius: 8,
+    },
+    buttonCancel:
+    {
+        width: '40%',
+        padding: 5,
+        backgroundColor: 'red',
+        borderRadius: 8,
+    },
+    buttonBoxText:
+    {
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+    }
 });
 
 export default AddTaskForm;

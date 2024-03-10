@@ -121,7 +121,7 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
 
                         {/* priority button, show selected time and enable user to edit the priority */}
                         <TouchableOpacity style={styles.priorityButton} onPress={() => handleTaskInfoView(i)}>
-                            <Text style={styles.checkListText}>{task[1] ? task[1] : 'Priority'}</Text>
+                            <Text style={styles.prioText}>{task[1] ? task[1] : 'Priority'}</Text>
                         </TouchableOpacity>
 
                         {/* checkbox button*/}
@@ -185,36 +185,50 @@ const styles = StyleSheet.create({
     taskView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 10,
         padding: 10,
-        backgroundColor: 'white',
+        backgroundColor: '#fbeed7',
         borderWidth: 1,
+        borderColor: 'grey',
     },
     checkListText: {
+        marginLeft: 10,
         fontSize: 18,
+        fontWeight: 'bold',
     },
     // priority Button styling
     priorityButton: {
         paddingVertical: 4,
         paddingHorizontal: 7,
-        backgroundColor: '#00BFFF',
+        backgroundColor: '#800080',
         borderRightWidth: 2,
         borderBottomWidth: 2,
-        borderRadius: 7,
+        borderRadius: 8,
         borderColor: '#b9bcbf',
+    },
+    prioText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
     },
     // checkbox styling
     checkBox: {
         width: '8%',
+        height: 30,
         justifyContent: 'center',
         alignItems:'center',
+        backgroundColor: 'white',
         borderWidth:1,
+        borderRadius: 3,
+        borderColor: 'grey',
     },
 
     // completed task list styling
     complTaskTitle: {
+        marginBottom: 15,
         fontSize: 20,
-        color: '#800080',
+        fontWeight: 'bold',
     },
 });
 

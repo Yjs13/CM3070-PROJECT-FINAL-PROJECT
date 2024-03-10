@@ -34,6 +34,7 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
         setEditFormVisible(false);
         // to set all task info 
         taskAllInfo[editIndex] = [titleText, priority, mainDueDate, timeFrame, descpText];
+        console.log(taskAllInfo);
 
         // saved the edited checklist view task value to the storage (title, due date and tick)
         const savedCheckListData = await AsyncStorage.getItem('checklist');
@@ -211,15 +212,30 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
                             <Text style={styles.deleteButtonText}>Delete</Text>
                         </Pressable>
 
-                        {/* Button to save and add in new task to the list */}
-                        <Button title='Save'
-                            onPress={()=> handleModTask()}
-                        />
-                        {/* Button to cancel the action of trying to add new task */}
-                        <Button title='Cancel'
-                            onPress={()=> setEditFormVisible(false)}
-                            color={'red'}
-                        />
+                        <View style={styles.buttonView}>
+                            {/* Button to save and add in new task to the list */}
+                            <Pressable 
+                                accessible={true}
+                                accessibilityLabel='Save Modified Task Button'
+                                style={styles.buttonSave} 
+                                onPress={()=> handleModTask()}
+                            >
+                                <Text style={styles.buttonBoxText}>
+                                    Save
+                                </Text>
+                            </Pressable>
+                            {/* Button to cancel the action of trying to add new task */}
+                            <Pressable 
+                                accessible={true}
+                                accessibilityLabel='Cancel Modification Task Button'
+                                style={styles.buttonCancel} 
+                                onPress={()=> setEditFormVisible(false)}
+                            >
+                                <Text style={styles.buttonBoxText}>
+                                    Cancel
+                                </Text>
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
           </Modal>
@@ -249,6 +265,7 @@ const styles = StyleSheet.create({
     dropButton:
     {
         width: '50%',
+        backgroundColor: '#fbeed7',
     },
     // drop down button text
     dropButtonText:
@@ -291,14 +308,44 @@ const styles = StyleSheet.create({
         marginVertical: '20%',
         padding: 5,
         backgroundColor: 'red',
+        borderRadius: 8,
     },
     deleteButtonText:
     {
         textAlign: 'center',
         color: 'white',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
     },
+
+    // save and cancel button styling
+    buttonView:
+    {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    buttonSave:
+    {
+        width: '40%',
+        padding:5,
+        backgroundColor: 'blue',
+        borderRadius: 8,
+    },
+    buttonCancel:
+    {
+        width: '40%',
+        padding: 5,
+        backgroundColor: 'red',
+        borderRadius: 8,
+    },
+    buttonBoxText:
+    {
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+    }
 });
 
 export default EditTaskForm;

@@ -93,11 +93,6 @@ function HomeScreen(){
       console.log(tickState != null ? JSON.parse(tickState) : null);
       const taskAllData = await AsyncStorage.getItem('taskInfo');
       console.log(taskAllData != null ? JSON.parse(taskAllData) : null);
-      const passData = await AsyncStorage.getItem('password');
-      console.log(passData != null ? JSON.parse(passData) : null);
-      const savedMaterials = await AsyncStorage.getItem('importantData');
-      console.log(savedMaterials != null ? JSON.parse(savedMaterials) : null);
-      
       await AsyncStorage.clear();
     } catch (e) {
       // error reading value
@@ -158,7 +153,7 @@ function HomeScreen(){
                 Add Task
               </Text>
             </Pressable> */}
-            <Pressable
+            {/* <Pressable
               accessible={true}
               accessibilityLabel='Get Data'
               onPress={()=> getData()}
@@ -167,7 +162,7 @@ function HomeScreen(){
               <Text style={styles.popUpButtonText}>
                 Get Data
               </Text>
-            </Pressable>
+            </Pressable> */}
         </View>
 
         {/* pop-up form to enable the user to edit the task */}
@@ -234,6 +229,7 @@ const HomePage = () =>{
         name='Secure Page' 
         component={AuthScreen} 
         options={{ 
+          headerTitle: '', 
           headerTintColor: '#800080',
           headerStyle: {
             backgroundColor: '#fbeed7', 

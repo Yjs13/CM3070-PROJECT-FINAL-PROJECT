@@ -14,9 +14,9 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen name="Welcome" component={WelcomePage} options={{headerShown:false}}/>
-        <Stack.Screen name="BottomTab" component={BottomTab} options={{headerShown:false}}/>
+      <Stack.Navigator initialRouteName='BottomTab'>
+        <Stack.Screen name='Welcome' component={WelcomePage} options={{headerShown:false}}/>
+        <Stack.Screen name='BottomTab' component={BottomTab} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

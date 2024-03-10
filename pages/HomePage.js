@@ -12,6 +12,7 @@ import React, {useState, useEffect} from 'react';
 // import CheckBox from '@react-native-community/checkbox';
 import { StyleSheet, Text, View, Pressable, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import EditTaskForm from '../components/EditTaskForm';
 import AddTaskForm from '../components/AddTaskForm';
@@ -20,7 +21,7 @@ import CheckList from '../components/Checklist';
 import MenuImg from '../assets/Images/icons8-menu-50.png';
 
 // Home Page of the task manager application
-const HomePage = () =>{
+function HomeScreen({navigation}){
   // to set the visibility of the add task pop up form
   const [formVisible, setFormVisible] = useState(false);
   // to set the edit pop-up form visibility state
@@ -71,7 +72,7 @@ const HomePage = () =>{
           }
           // else if(savedAllTaskData)
           // {
-          //   console.log("h");
+          //   console.log('h');
           //   const parsedAllTaskData = JSON.parse(savedAllTaskData);
           //   setTaskAllInfo(parsedAllTaskData);
           // }
@@ -99,13 +100,6 @@ const HomePage = () =>{
 
   return (
     <View style={styles.container} >
-      {/* header space for sorting features */}
-      <View style={styles.header}>
-        <Pressable style={styles.menuButton}>
-          {/* https://icons8.com/icon/36389/menu (Menu) icon by https://icons8.com Icons8*/}
-          <Image source={MenuImg} style={styles.menuButtonImg}/>
-        </Pressable>
-      </View>
       <View 
         style={styles.homePageView} 
         accessible={true} 
@@ -209,6 +203,44 @@ const HomePage = () =>{
   );
 }
 
+function SecureScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Secure Page</Text>
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+const HomePage = () =>{
+  return(
+    <Drawer.Navigator initialRouteName='Home Page'>
+      <Drawer.Screen 
+        name='Home Page' 
+        component={HomeScreen} 
+        options={{ 
+          headerTitle: '', 
+          headerTintColor: '#800080',
+          headerStyle: {
+            backgroundColor: '#fbeed7', 
+          },
+        }}
+      />
+      <Drawer.Screen 
+        name='Secure Page' 
+        component={SecureScreen} 
+        options={{ 
+          headerTitle: '', 
+          headerTintColor: '#800080',
+          headerStyle: {
+            backgroundColor: '#fbeed7', 
+          },
+        }}
+      />
+    </Drawer.Navigator>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -222,33 +254,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
-  // top header styles
-  header: {
-    width: '100%',
-    height: '12%',
-    backgroundColor: '#fbeed7',
-  },
-  menuButton: {
-    marginLeft: 22,
-    marginTop: '12%',
-  },
-  menuButtonImg: {
-    width: 30,
-    height: 32,
-  },
-
   //add task pop-up button styling
   popUpButton: {
     position: 'absolute',
     bottom: 24,
     right: '7%',
     paddingHorizontal: 15,
-    backgroundColor: '#6CB4EE',
+    backgroundColor: '#800080',
     borderRadius: 40,
   },
   popUpButtonText: {
     alignItems: 'center',
     fontSize: 40,
+    color: 'white',
   },
 });
 

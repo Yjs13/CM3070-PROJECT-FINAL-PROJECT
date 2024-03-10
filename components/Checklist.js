@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     // completed task list styling
     complTaskTitle: {
         fontSize: 20,
-        color: 'white',
+        color: '#800080',
     },
 });
 

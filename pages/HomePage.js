@@ -17,11 +17,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditTaskForm from '../components/EditTaskForm';
 import AddTaskForm from '../components/AddTaskForm';
 import CheckList from '../components/Checklist';
+import Authentication from '../components/Authentication';
 // https://icons8.com/icon/36389/menu (Menu) icon by https://icons8.com Icons8 (9 Mar 2024)
 import MenuImg from '../assets/Images/icons8-menu-50.png';
 
 // Home Page of the task manager application
-function HomeScreen({navigation}){
+function HomeScreen(){
   // to set the visibility of the add task pop up form
   const [formVisible, setFormVisible] = useState(false);
   // to set the edit pop-up form visibility state
@@ -203,11 +204,9 @@ function HomeScreen({navigation}){
   );
 }
 
-function SecureScreen({ navigation }) {
+function AuthScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Secure Page</Text>
-    </View>
+    <Authentication/>
   );
 }
 
@@ -228,7 +227,7 @@ const HomePage = () =>{
       />
       <Drawer.Screen 
         name='Secure Page' 
-        component={SecureScreen} 
+        component={AuthScreen} 
         options={{ 
           headerTitle: '', 
           headerTintColor: '#800080',

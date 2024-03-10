@@ -50,7 +50,7 @@ const WelcomePage = () =>{
           <Text style={styles.nextButtonText}>
             Next
           </Text>
-      </Pressable>
+        </Pressable>
       </View>
     </View>
   );
@@ -96,13 +96,13 @@ const styles = StyleSheet.create({
   nextButton: {
     marginVertical: 20,
     marginHorizontal: 30,
-    padding: 8,
+    padding: 6,
     backgroundColor: '#800080', 
     borderRadius: 8,
   },
   nextButtonText: {
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 20,
     color: 'white',
   }
 

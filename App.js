@@ -7,15 +7,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // components
 import WelcomePage from './pages/WelcomePage';
+import SecurePageView from './pages/SecurePage';
 import BottomTab from './components/BottomNavigation';
+import SetupPassword from './components/SetUpPassword';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='BottomTab'>
+      <Stack.Navigator initialRouteName='Welcome'>
         <Stack.Screen name='Welcome' component={WelcomePage} options={{headerShown:false}}/>
+        <Stack.Screen name='Secure' component={SecurePageView}/>
+        <Stack.Screen name='Setup Password' component={SetupPassword}/>
         <Stack.Screen name='BottomTab' component={BottomTab} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>

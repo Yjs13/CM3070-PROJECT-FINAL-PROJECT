@@ -10,12 +10,14 @@
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import React, {useState, useEffect} from 'react';
 // import CheckBox from '@react-native-community/checkbox';
-import { StyleSheet, Text, View, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Pressable, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import EditTaskForm from '../components/EditTaskForm';
 import AddTaskForm from '../components/AddTaskForm';
 import CheckList from '../components/Checklist';
+// https://icons8.com/icon/36389/menu (Menu) icon by https://icons8.com Icons8 (9 Mar 2024)
+import MenuImg from '../assets/Images/icons8-menu-50.png';
 
 // Home Page of the task manager application
 const HomePage = () =>{
@@ -96,13 +98,19 @@ const HomePage = () =>{
   // };
 
   return (
-    <View 
-      style={styles.container} 
-      accessible={true} 
-      accessibilityLabel='Home Page View'
-    >
-        {/* header space for sorting features */}
-
+    <View style={styles.container} >
+      {/* header space for sorting features */}
+      <View style={styles.header}>
+        <Pressable style={styles.menuButton}>
+          {/* https://icons8.com/icon/36389/menu (Menu) icon by https://icons8.com Icons8*/}
+          <Image source={MenuImg} style={styles.menuButtonImg}/>
+        </Pressable>
+      </View>
+      <View 
+        style={styles.homePageView} 
+        accessible={true} 
+        accessibilityLabel='Home Page View'
+      >
         {/* tasks checklist added by the user container*/}
         <CheckList 
           tickVisible={tickVisible}
@@ -139,7 +147,7 @@ const HomePage = () =>{
               setMainDueDate={setMainDueDate}
             />
 
-            {/* add task button to show the pop up form */}
+            {/* add task button to show the pop up form
             <Pressable
               accessible={true}
               accessibilityLabel='Add Task Button'
@@ -149,7 +157,7 @@ const HomePage = () =>{
               <Text style={styles.popUpButtonText}>
                 Add Task
               </Text>
-            </Pressable>
+            </Pressable> */}
             {/* <Pressable
               accessible={true}
               accessibilityLabel='Get Data'
@@ -185,6 +193,18 @@ const HomePage = () =>{
           setDescpText={setDescpText}
           tickVisible={tickVisible}
         />
+        {/* add task button to show the pop up form */}
+        <Pressable
+          accessible={true}
+          accessibilityLabel='Add Task Button'
+          onPress={()=> setFormVisible(true)}
+          style = {styles.popUpButton}
+        >
+          <Text style={styles.popUpButtonText}>
+            +
+          </Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -192,19 +212,43 @@ const HomePage = () =>{
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height:'100%',
+  },
+
+  homePageView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'purple',
+    backgroundColor: 'white',
+  },
+
+  // top header styles
+  header: {
+    width: '100%',
+    height: '12%',
+    backgroundColor: '#fbeed7',
+  },
+  menuButton: {
+    marginLeft: 22,
+    marginTop: '12%',
+  },
+  menuButtonImg: {
+    width: 30,
+    height: 32,
   },
 
   //add task pop-up button styling
   popUpButton: {
-    padding: 10,
+    position: 'absolute',
+    bottom: 24,
+    right: '7%',
+    paddingHorizontal: 15,
     backgroundColor: '#6CB4EE',
+    borderRadius: 40,
   },
   popUpButtonText: {
-    fontSize: 20,
+    alignItems: 'center',
+    fontSize: 40,
   },
 });
 

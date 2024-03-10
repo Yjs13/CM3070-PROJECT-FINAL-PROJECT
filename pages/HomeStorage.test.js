@@ -1,3 +1,4 @@
+// https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil (8 Mar 2024, Tia Eastwood, Posted on 20 Jan 2023 • Updated on 31 Mar 2023)
 import React from 'react';
 import { render, fireEvent, act, waitFor, cleanup } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';

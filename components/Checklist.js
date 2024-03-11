@@ -1,13 +1,11 @@
 // checklist component in the home page
-// https://reactnative.dev/docs/touchableopacity
-// https://reactnative.dev/docs/pressable
+// Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
-import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInfo,setEditIndex,setTitleText,setPriority,checkList,setCheckList,setMainDueDate,taskAllInfo,setTaskAllInfo,setTimeFrame,setDescpText}) =>{
+const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInfo,setEditIndex,setTitleText,setPriority,checkList,setMainDueDate,taskAllInfo,setTimeFrame,setDescpText}) =>{
 
   // handle the checkBox
   const handleCheckBox= async(taskId) =>{
@@ -29,13 +27,9 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
         const savedTickData = await AsyncStorage.getItem('ticks');
         const parsedData = JSON.parse(savedTickData);
         setTickVisible(parsedData);
-        // setTickVisible(newTickVisible);
     }
     else if(tickVisible[taskId] == false)
     {
-        // const newTickVisible = [...tickVisible];
-        // newTickVisible[taskId] = true;
-
         // retrieve the tick data from the storage
         const existTickData = await AsyncStorage.getItem('ticks');
         const parsedTickData = JSON.parse(existTickData);
@@ -47,7 +41,6 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
         const savedTickData = await AsyncStorage.getItem('ticks');
         const parsedData = JSON.parse(savedTickData);
         setTickVisible(parsedData);
-        // setTickVisible(newTickVisible);
     }
   }
 
@@ -64,16 +57,13 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
     setPriority(checkList[i][1]);
     // set the storage saved string value to date format
     setMainDueDate(new Date(checkList[i][2]));
-    // setTaskAllInfo(parsedAllTaskData);
 
     // checks whether the task extra info(timeframe, description) was set by the user for the selected task
-    // if(taskAllInfo !== undefined && taskAllInfo !== null && taskAllInfo.length == i)
     if(taskAllInfo[i] !== undefined && taskAllInfo[i] !== null)
     {
         const savedAllTaskData = await AsyncStorage.getItem('taskInfo');
         const parsedAllTaskData = JSON.parse(savedAllTaskData);
         // set the timeframe info to the task and show it in the edit task form
-        // setTimeFrame(taskAllInfo[i][3]);
         setTimeFrame(parsedAllTaskData[i][3]);
         setDescpText(taskAllInfo[i][4]);
     }

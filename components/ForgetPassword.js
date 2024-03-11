@@ -1,7 +1,10 @@
+// Adapt from 2024 React Native Community
+// https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, TextInput, Pressable, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// for user to retrieve their forgotten password
 const ForgetPass = () =>{
     const [passwordData, setPasswordData] = useState('');
     const [quizValue, setQuizValue] = useState('');
@@ -96,8 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
-  }
-
+  },
 });
 
 export default ForgetPass;

@@ -1,3 +1,5 @@
+// Adapt from 2024 React Native Community
+// https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import { StyleSheet, Text, View, TextInput, Pressable,Alert } from 'react-native';
 import React, {useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -44,7 +46,7 @@ const Authentication = () =>{
             accessible={true} 
             accessibilityLabel='Authentication View'
         >
-            <View style={styles.passwordView}>
+            <View>
                 <Text style={styles.titleText}>Please Enter The Password</Text>
                 <TextInput 
                     placeholder='Password'
@@ -79,9 +81,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
-  },
-  passwordView: {
-    
   },
 
   titleText: {

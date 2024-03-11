@@ -1,15 +1,8 @@
 // Adapt from Github by Adel Reda
 // https://github.com/AdelRedaa97/react-native-select-dropdown (22 Feb 2024)
-
-// Adapt from React Native
-// https://reactnative.dev/docs/button
-// https://reactnative.dev/docs/pressable
-// https://reactnative.dev/docs/modal
-// https://reactnative.dev/docs/handling-text-input
-
 // Adapt from npm
 // https://www.npmjs.com/package/@react-native-community/datetimepicker(28 Feb 2024)
-
+// Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import { StyleSheet, Text, TextInput, View, Modal, Pressable } from 'react-native';
 import React, { useState } from 'react'
@@ -17,7 +10,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority,setPriority,priorities,setCheckList,tickVisible,setTickVisible,setMainDueDate}) =>{
+const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority,setPriority,priorities,setCheckList,setTickVisible,setMainDueDate}) =>{
   // to set the due date of the task
   // to the picker calendar display
   // default value is the current date of the user timezone  
@@ -62,7 +55,6 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
         // set the storage data to the the checklist
         setTickVisible(parsedTickData);
 
-        // setTickVisible([...tickVisible, false]);
         //after a new task is successfully "saved", the form will be closed
         setFormVisible(false);
         // set the due date button text back to default
@@ -77,21 +69,6 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
         console.error(e);
     }
   }
-//   const handleNewTask= (task, prio) =>{
-//     const newTask = [task, prio, dueDate];
-//     // save the tasks into a list
-//     setCheckList([...checkList, newTask]);
-//     //after a new task is successfully saved, the form will be closed
-//     setFormVisible(false);
-//     // save each individual checkbox state
-//     setTickVisible([...tickVisible, false]);
-//     // set the due date button text back to default
-//     setDueDateText('Due Date');
-//     // set the main due date value that was shared by other component
-//     setMainDueDate(dueDate);
-//     // set back the picker calendar value to the current date of the user
-//     setDueDate(new Date());
-//   }
 
   // handle cancel task
   const handleCancelTask= () =>{

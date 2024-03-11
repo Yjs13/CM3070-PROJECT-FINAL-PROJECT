@@ -1,18 +1,11 @@
 // adapt from Github by Adel Reda
 // https://github.com/AdelRedaa97/react-native-select-dropdown (22 Feb 2024)
-
-// adapt from react native for button, modal, textInput, pressable
-// https://reactnative.dev/docs/button
-// https://reactnative.dev/docs/modal
-// https://reactnative.dev/docs/handling-text-input
-// https://reactnative.dev/docs/pressable
-
+// Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
-
 // Adapt from npm
 // https://www.npmjs.com/package/@react-native-community/datetimepicker(28 Feb 2024)
 import React, {useState} from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Modal, Pressable, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Modal, Pressable, Alert } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,9 +15,6 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
     // to set the due date of the task
     // to set the visibility of the date picker
     const [dateVisible, setDateVisible] = useState(false);
-    // console.log(mainDueDate.toLocaleDateString());
-    // // to set all task information
-    // const [taskAllInfo, setTaskAllInfo] = useState([]);
 
     // handle task modification //
     // when the user save a modified task
@@ -118,7 +108,7 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
                 onRequestClose={() => {
                     setEditFormVisible(!editFormVisible);
             }}>
-                <View style={styles.formView}>
+                <View>
                     <View style={styles.formContainer}>
                         {/* task title input box */}
                         <TextInput 
@@ -235,9 +225,6 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
 }
 
 const styles = StyleSheet.create({
-    formView: {
-        
-    },
     formContainer: {
         padding: '5%',
         paddingTop: '8%',

@@ -1,11 +1,10 @@
+// adapted from W3Schools
+// https://www.w3schools.com/js/js_array_sort.asp (10 Mar 2024)
 import { StyleSheet, Text, View, Pressable,Image, Modal } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // "https://icons8.com/icon/70820/sorting-arrows" Sorting Arrows icon by href="https://icons8.com" Icons8
 import ArrowIcon from '../assets/Images/icons8-sorting-arrows-24.png'
-
-// adapted from https://www.w3schools.com/js/js_array_sort.asp (10 Mar 2024)
 
 // to sort the the task according to algorithm
 const SortingTask = ({checkList, setCheckList}) =>{
@@ -18,7 +17,6 @@ const SortingTask = ({checkList, setCheckList}) =>{
             try{
                 // save the data as a backup
                 setSaveData(checkList);
-                console.log('h')
             }catch(e){
                 console.error(e)
             }
@@ -39,6 +37,7 @@ const SortingTask = ({checkList, setCheckList}) =>{
 
     // sorting algorthim to sort the task in the checklist
     const sortWithPrio = (sort)=> {
+        // to set color to the selected text
         setSelectedOption(sort);
         const sortedTasks = saveData.sort((a, b) => {
             const priorityA = priorityValues[a[1]];
@@ -47,7 +46,10 @@ const SortingTask = ({checkList, setCheckList}) =>{
         });
         setCheckList(sortedTasks);
     }
+    // sorting algorithm to sort the task according to the due date
+    // the closer the due date from the current date the higher the priority of the task
     const sortWithDueDate = (sort)=> {
+        // to set color to the selected text
         setSelectedOption(sort);
         const sortedTasks = saveData.sort((a, b) => {
             const priorityA = priorityValues[new Date(a[2]).toISOString().split('T')[0]];
@@ -56,8 +58,9 @@ const SortingTask = ({checkList, setCheckList}) =>{
         });
         setCheckList(sortedTasks);
     }
-    // save the sorting of the checklist to none
+    // save the sorting of the checklist to normal
     const sortWithNone = (sort)=> {
+        // to set color to the selected text
         setSelectedOption(sort);
         setCheckList(saveData);
     }
@@ -79,7 +82,7 @@ const SortingTask = ({checkList, setCheckList}) =>{
             onRequestClose={() => {
             setFormVisible(!formVisible);
         }}>
-            <View style={styles.formView}>
+            <View>
                 <View style={styles.formContainer}>
                     <Pressable style={styles.sortingView} onPress={()=>sortWithPrio('priority')}>
                         <Text style={[styles.sortingText, selectedOption === 'priority' && styles.selectedSort]}>
@@ -123,8 +126,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         alignSelf:'flex-end'
     },
-    formView: {
-    },
     formContainer: {
         margin: '10%',
         marginTop: '20%',
@@ -153,7 +154,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
-
 });
 
 export default SortingTask;

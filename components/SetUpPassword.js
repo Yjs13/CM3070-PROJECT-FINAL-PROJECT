@@ -1,3 +1,4 @@
+// Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import { StyleSheet, Text, View, TextInput, Pressable, Alert } from 'react-native';
 import React, {useState} from 'react';

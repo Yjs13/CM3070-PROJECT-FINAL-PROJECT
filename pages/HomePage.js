@@ -1,26 +1,19 @@
-// Home Page where it allows user to add, view, and edit tasks
-// adapt from react native for button, modal, textInput, touchableOpacity, dropdown, pressable
-// https://reactnative.dev/docs/button
-// https://reactnative.dev/docs/modal
-// https://reactnative.dev/docs/handling-text-input
-// https://reactnative.dev/docs/touchableopacity
-// https://reactnative.dev/docs/pressable
+// Home Page where it allows user to add, view, edit and sort tasks
 // adapt from Github by Adel Reda
 // https://github.com/AdelRedaa97/react-native-select-dropdown (22 Feb 2024)
+// Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import React, {useState, useEffect} from 'react';
-// import CheckBox from '@react-native-community/checkbox';
-import { StyleSheet, Text, View, Pressable, Image} from 'react-native';
+import { StyleSheet, Text, View, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+// components
 import EditTaskForm from '../components/EditTaskForm';
 import AddTaskForm from '../components/AddTaskForm';
 import CheckList from '../components/Checklist';
 import Authentication from '../components/Authentication';
 import SortingTask from '../components/SortingTask';
-// https://icons8.com/icon/36389/menu (Menu) icon by https://icons8.com Icons8 (9 Mar 2024)
-// import MenuImg from '../assets/Images/icons8-menu-50.png';
 
 // Home Page of the task manager application
 function HomeScreen(){
@@ -34,8 +27,6 @@ function HomeScreen(){
   const [editIndex, setEditIndex] = useState('');
   //to set the value of the 'Title' textInput
   const [titleText, setTitleText] = useState('');
-  //to set the value of the 'Description' textInput
-  const [descrText, setDescrText] = useState('');
   //to set the value of the whole checklist, an array of value
   const [checkList, setCheckList] = useState([]);
   // to set the visibility for each individual checkBox tick
@@ -78,21 +69,7 @@ function HomeScreen(){
     };
 
     getSavedCheckList();
-  }, [])
-
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('checklist');
-      console.log(jsonValue != null ? JSON.parse(jsonValue) : null);
-      const tickState = await AsyncStorage.getItem('ticks');
-      console.log(tickState != null ? JSON.parse(tickState) : null);
-      const taskAllData = await AsyncStorage.getItem('taskInfo');
-      console.log(taskAllData != null ? JSON.parse(taskAllData) : null);
-      await AsyncStorage.clear();
-    } catch (e) {
-      // error reading value
-    }
-  };
+  }, []);
 
   return (
     <View style={styles.container} >
@@ -104,7 +81,6 @@ function HomeScreen(){
         <SortingTask 
           checkList={checkList} 
           setCheckList={setCheckList}
-          setFormVisible={setFormVisible} 
         />
         {/* tasks checklist added by the user container*/}
         <CheckList 
@@ -116,10 +92,8 @@ function HomeScreen(){
           setTitleText={setTitleText}
           setPriority={setPriority}
           checkList={checkList}
-          setCheckList={setCheckList}
           setMainDueDate={setMainDueDate}
           taskAllInfo={taskAllInfo}
-          setTaskAllInfo={setTaskAllInfo}
           setTimeFrame={setTimeFrame}
           setDescpText={setDescpText}
         />
@@ -135,22 +109,10 @@ function HomeScreen(){
               priority={priority}
               setPriority={setPriority}
               priorities={priorities}
-              checkList={checkList}
               setCheckList={setCheckList}
-              tickVisible={tickVisible}
               setTickVisible={setTickVisible}
               setMainDueDate={setMainDueDate}
             />
-            {/* <Pressable
-              accessible={true}
-              accessibilityLabel='Get Data'
-              onPress={()=> getData()}
-              style = {styles.popUpButton}
-            >
-              <Text style={styles.popUpButtonText}>
-                Get Data
-              </Text>
-            </Pressable> */}
         </View>
 
         {/* pop-up form to enable the user to edit the task */}
@@ -171,7 +133,6 @@ function HomeScreen(){
           timeFrame={timeFrame}
           setTimeFrame={setTimeFrame}
           taskAllInfo={taskAllInfo}
-          setTaskAllInfo={setTaskAllInfo}
           descpText={descpText}
           setDescpText={setDescpText}
           tickVisible={tickVisible}

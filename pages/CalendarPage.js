@@ -1,5 +1,8 @@
+// adapt from Github by Tautvilas Mecinskas and Katrin Zotchev, 2017 Wix.com
 // https://github.com/wix/react-native-calendars?tab=readme-ov-file (29 Feb 2024)
+// reference from a forum at stack overflow from Minty Fresh on 29 Feb 2024
 // https://stackoverflow.com/questions/47066555/remove-time-after-converting-date-toisostring (29 Feb 2024)
+// Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import React, {useEffect, useState} from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
@@ -49,7 +52,6 @@ const CalendarPage = () =>{
     markedDay[selected] = {
       selected: true,
       disableTouchEvent: true,
-      // selectedDotColor: 'orange',
     }
   }
   const handleCalendarPress = (date) => {
@@ -68,7 +70,6 @@ const CalendarPage = () =>{
     >
       <Calendar
         style={styles.calendarView}
-        // theme={{todayTextColor: 'orange'}}
         // set the calendar to show the user current date
         current={currentDate.toISOString().split('T')[0]}
         // Callback that gets called when the user selects a day

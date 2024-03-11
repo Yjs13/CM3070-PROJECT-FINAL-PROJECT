@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, act, waitFor} from '@testing-library/react-native';
+import { render, fireEvent, act} from '@testing-library/react-native';
 import HomePage from './HomePage';
 import { Button } from 'react-native';
 
@@ -53,37 +53,4 @@ test('Cancel Button onPress callback is called when it is pressed', () => {
     // test whether the function is successfully called when the button is pressed
     expect(getByText('Add Task')).toBeTruthy();
     
-})
-
-// test on the edit task feature
-// test('Edit task feature modifies the task correctly', () => {
-//     const { getByText, getByLabelText, getByPlaceholderText } = render(<HomePage />);
-//     const addTaskButton = getByLabelText('Add Task Button');
-
-//     // add new task into the list //
-
-//     // to make the add task pop-up form to be visible
-//     // by simulating a pressing action on the Add Task button
-//     fireEvent.press(addTaskButton);
-//     // simulate the event of adding new task with the title of 'Task 1'
-//     fireEvent.changeText(getByPlaceholderText('Title'), 'Task 1');
-//     // simulate the action of user pressing the save button
-//     fireEvent.press(getByText('Save'));
-
-//     fireEvent.press(getByLabelText('task pressable'));
-//     fireEvent.changeText(getByPlaceholderText('Task 1'), 'Modified Task');
-//     fireEvent.press(getByText('Save'));
-
-//     // test whether the title for the task list matches the title that user have set
-//     expect(getByText('Modified Task')).toBeTruthy();
-// })
-
-// test('Button onPress callback is called when pressed', () => {
-//     const onPressMock = jest.fn();
-//     const { getByText } = render(<Button onPress={onPressMock} title="Click Me" />);
-//     const buttonElement = getByText('Click Me');
-
-//     fireEvent.press(buttonElement);
-
-//     expect(onPressMock).toHaveBeenCalledTimes(1);
-// });
+});

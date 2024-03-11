@@ -1,24 +1,17 @@
-// https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil (8 Mar 2024, Tia Eastwood, Posted on 20 Jan 2023 • Updated on 31 Mar 2023)
+// adapt from Tia Eastwood, Posted on 20 Jan 2023 • Updated on 31 Mar 2023
+// https://dev.to/tiaeastwood/how-to-mock-and-test-asyncstorage-in-react-native-4kil (8 Mar 2024)
 import React from 'react';
 import { render, fireEvent, act, waitFor, cleanup } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import HomePage from './HomePage';
 
-
 describe("<HomePage />", () => {
     beforeEach(async () => {
         // set up the storage 
-        // await AsyncStorage.setItem('checklist', JSON.stringify([["U","High","2024-03-03T05:29:00.000Z"]]));
-        // await AsyncStorage.setItem('ticks', JSON.stringify([false]));
-        // await AsyncStorage.setItem('taskInfo', JSON.stringify([["U","High","2024-03-03T05:29:00.000Z","1h","Love"]]));
         await AsyncStorage.setItem('checklist', JSON.stringify([]));
         await AsyncStorage.setItem('ticks', JSON.stringify([]));
         await AsyncStorage.setItem('taskInfo', JSON.stringify([]));
-
-        // expect(await AsyncStorage.getItem('checklist')).toEqual(JSON.stringify([["U","High","2024-03-03T05:29:00.000Z"]]));
-        // expect(await AsyncStorage.getItem('ticks')).toEqual(JSON.stringify([false]));
-        // expect(await AsyncStorage.getItem('taskInfo')).toEqual(JSON.stringify([["U","High","2024-03-03T05:29:00.000Z","1h","Love"]]));
     });
 
     afterEach(() => {
@@ -209,116 +202,4 @@ describe("<HomePage />", () => {
             expect(getByLabelText('Add Task Button')).toBeTruthy();
         })
     });
-    // it('handleDueDate function handles values correctly', async() =>{
-    //     const { getByText, getByLabelText, getByPlaceholderText } = render(<HomePage />);
-    //     const addTaskButton = getByLabelText('Add Task Button');
-
-    //     // add new task into the list //
-
-    //     // to make the add task pop-up form to be visible
-    //     // by simulating a pressing action on the Add Task button
-    //     fireEvent.press(addTaskButton);
-    //     act(() => {
-    //         // simulate the event of adding new task with the title of 'Task 3'
-    //         fireEvent.changeText(getByPlaceholderText('Title'), 'Task 3');
-    //         fireEvent.press(getByLabelText('Due Date Button'));
-    //     });
-
-    //     await act(() => {
-    //         // // stimulate the action of user pressing the due date button
-    //         // fireEvent.press(getByLabelText('Due Date Calendar Picker'));
-    //         // fireEvent.onChange(getByLabelText('Due Date Calendar Picker'), {}, new Date('2024-03-04'));
-    //         console.log(getByLabelText('Due Date Calendar Picker').value)
-    //         getByLabelText('Due Date Calendar Picker').props.onDateChange({}, new Date('2024-03-04'));
-    //     });
-    //     // fireEvent.press(getByLabelText('f'));
-
-    //     await waitFor(() => {
-    //         expect(handleDueDate).toHaveBeenCalledWith({}, new Date('2024-03-04'));
-    //     });
-    // });
 });
-
-
-// homePage.js unit testing on user interaction
-// Async storage testing
-// test whether the handleNewTask function works correctly
-// test on whether the correct value is set into the useState
-// test('handleNewTask function handles values correctly', async() => {
-//     // set the storage for testing
-//     await act(async () => {
-//         await AsyncStorage.setItem('checklist', JSON.stringify([]));
-//         await AsyncStorage.setItem('ticks', JSON.stringify([]));
-//         await AsyncStorage.setItem('taskInfo', JSON.stringify([]));
-//     });
-
-//     const { getByText, getByPlaceholderText, getByLabelText } = render(<HomePage />);
-//     const addTaskButton = getByLabelText('Add Task Button');
-
-//     // to make the add task pop-up form to be visible
-//     // by simulating a pressing action on the Add Task button
-//     fireEvent.press(addTaskButton);
-
-//     // test whether the pop-up form is successfully visible
-//     expect(getByLabelText('Add Task Pop-up Form')).toBeTruthy();
-
-//     act(() => {
-//         // simulate the event of adding new task with the title of 'Task 1'
-//         fireEvent.changeText(getByPlaceholderText('Title'), 'Task 1');
-
-//         // simulate the action of user pressing the save button
-//         fireEvent.press(getByLabelText('Save New Task Button'));
-//     });
-
-//     await act(async () => {
-//         await AsyncStorage.getItem('checklist');
-//     });
-
-//     waitFor(() => {
-//         // test whether the title for the task list matches the title that user have set
-//         expect(getByText('Task 1')).toBeTruthy();
-//     });
-// })
-
-// // test on the checklist when there is task on the list
-// // test whether the checkbox could be check and uncheck when the user pressed
-// test('CheckBox can be checked and unchecked successfully', async() => {
-//     // to set up the storage
-//     await act(async () => {
-//         await AsyncStorage.setItem('checklist', JSON.stringify([]));
-//         await AsyncStorage.setItem('ticks', JSON.stringify([]));
-//         await AsyncStorage.setItem('taskInfo', JSON.stringify([]));
-//     });
-
-//     const { getByText, getByLabelText, getByPlaceholderText } = render(<HomePage />);
-//     const addTaskButton = getByLabelText('Add Task Button');
-
-//     // add new task into the list //
-
-//     // to make the add task pop-up form to be visible
-//     // by simulating a pressing action on the Add Task button
-//     fireEvent.press(addTaskButton);
-//     act(() => {
-//         // simulate the event of adding new task with the title of 'Task 1'
-//         fireEvent.changeText(getByPlaceholderText('Title'), 'Task 1');
-//         // simulate the action of user pressing the save button
-//         fireEvent.press(getByText('Save'));
-//     });
-
-//     // test on the checkbox feature //
-//     await waitFor(() => {
-//         // when a new task is successfully appear in the list
-//         // simulate a press action to click the checkbox
-//         fireEvent.press(getByLabelText('uncheck box button'));
-
-//         // test whether the checkbox is successfully checked when the button is pressed
-//         // test check icon to appear when user pressed on the checkbox
-//         expect(getByLabelText('check icon')).toBeTruthy();
-//     });
-
-//     // simulate a press action on the checked checkbox
-//     fireEvent.press(getByLabelText('checked box button'));
-
-//     // test whether the checkbox is successfully unchecked when button is pressed
-//     expect(getByLabelText('uncheck box button')).toBeTruthy();
-// })

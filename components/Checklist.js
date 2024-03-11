@@ -13,9 +13,6 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
     // enable click and unclick the checkbox
     if(tickVisible[taskId] == true)
     {
-        // const newTickVisible = [...tickVisible];
-        // newTickVisible[taskId] = false;
-
         // retrieve the tick data from the storage
         const existTickData = await AsyncStorage.getItem('ticks');
         const parsedTickData = JSON.parse(existTickData);

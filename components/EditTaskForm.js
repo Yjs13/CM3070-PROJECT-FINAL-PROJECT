@@ -34,7 +34,6 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
         setEditFormVisible(false);
         // to set all task info 
         taskAllInfo[editIndex] = [titleText, priority, mainDueDate, timeFrame, descpText];
-        console.log(taskAllInfo);
 
         // saved the edited checklist view task value to the storage (title, due date and tick)
         const savedCheckListData = await AsyncStorage.getItem('checklist');
@@ -52,14 +51,6 @@ const EditTaskForm = ({editFormVisible,setEditFormVisible,titleText,setTitleText
         parsedAllTaskData[editIndex] = [titleText, priority, mainDueDate, timeFrame, descpText];
         // saved the new value back into the storage
         await AsyncStorage.setItem('taskInfo', JSON.stringify(parsedAllTaskData));
-
-        // const existTaskData = await AsyncStorage.getItem('checklist');
-        // const taskValue = existTaskData ? JSON.parse(existTaskData) : [];
-        // // push in new task info into the array
-        // taskValue.push(newTask);
-        // // update the new task info into the storage
-        // // only accepts string value so the date() need to change to string type
-        // await AsyncStorage.setItem('checklist', JSON.stringify(taskValue));
     }
 
     // to handle the data retrieved from the picker after the user has made changes (ok button is pressed)

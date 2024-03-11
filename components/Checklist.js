@@ -82,17 +82,6 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
         setTimeFrame('Timeframe');
         setDescpText('');
     }
-    // if(taskAllInfo[i] !== undefined)
-    // {
-    //     // set the timeframe info to the task and show it in the edit task form
-    //     setTimeFrame(taskAllInfo[i][3]);
-    //     setDescpText(taskAllInfo[i][4]);
-    // }
-    // else
-    // {
-    //     setTimeFrame('Timeframe');
-    //     setDescpText('');
-    // }
   }
 
   return (

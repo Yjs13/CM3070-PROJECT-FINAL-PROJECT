@@ -11,13 +11,13 @@
 // https://www.npmjs.com/package/@react-native-community/datetimepicker(28 Feb 2024)
 
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
-import { StyleSheet, Text, TextInput, View, Button, Modal, Pressable, Alert } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Modal, Pressable } from 'react-native';
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority,setPriority,priorities,checkList,setCheckList,tickVisible,setTickVisible,setMainDueDate}) =>{
+const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority,setPriority,priorities,setCheckList,tickVisible,setTickVisible,setMainDueDate}) =>{
   // to set the due date of the task
   // to the picker calendar display
   // default value is the current date of the user timezone  
@@ -48,9 +48,6 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
         const parsedTaskData = JSON.parse(savedTaskData);
         // set the storage data to the the checklist
         setCheckList(parsedTaskData);
-
-        // to set the checklists info
-        // setCheckList([...checkList, newTask]);
 
         // save each individual checkbox state
         const existTickData = await AsyncStorage.getItem('ticks');

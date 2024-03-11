@@ -7,8 +7,6 @@ import CalendarIcon from '../assets/Images/icons8-calendar-64.png';
 import ReminderIcon from '../assets/Images/icons8-reminder-48.png';
 // https://icons8.com/icon/znpDNZWhQe6p/lock Lock icon by https://icons8.com
 import LockIcon from '../assets/Images/icons8-lock-48.png';
-// https://icons8.com/icon/44053/star icon by a https://icons8.com Icons8
-import StarIcon from '../assets/Images/icons8-star-64.png';
 
 const WelcomePage = () =>{
 
@@ -41,10 +39,6 @@ const WelcomePage = () =>{
         <View style={styles.infoView}>
           <Text style={styles.infoText}>Privacy Feature</Text>
           <Image source={LockIcon}/>
-        </View>
-        <View style={styles.infoView}>
-          <Text style={styles.infoText}>Customization</Text>
-          <Image source={StarIcon}/>
         </View>
         <Pressable style={styles.nextButton} onPress={goToHomePage}>
           <Text style={styles.nextButtonText}>

@@ -24,6 +24,7 @@
     "react-native-gesture-handler": "^2.14.0",
     "react-native-reanimated": "^3.6.2",
     "react-native-select-dropdown": "^3.4.0",
+    "react-native-tableview-simple": "^4.4.0",
     "react-native-vector-icons": "^10.0.3"
   },
   "devDependencies": {

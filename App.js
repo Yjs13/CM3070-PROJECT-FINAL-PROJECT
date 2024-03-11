@@ -12,6 +12,7 @@ import BottomTab from './components/BottomNavigation';
 import SetupPassword from './components/SetUpPassword';
 import Authentication from './components/Authentication';
 import ForgetPass from './components/ForgetPassword';
+import AboutUsPage from './pages/AboutUsPage';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name='Setup Password' component={SetupPassword} options={{headerTintColor: '#800080',headerStyle: {backgroundColor: '#fbeed7'}}}/>
         <Stack.Screen name='Authentication' component={Authentication}/>
         <Stack.Screen name='Forget Password' component={ForgetPass} options={{headerTintColor: '#800080',headerStyle: {backgroundColor: '#fbeed7'}}}/>
+        <Stack.Screen name='About Us' component={AboutUsPage} options={{headerTintColor: '#800080',headerStyle: {backgroundColor: '#fbeed7'}}}/>
         <Stack.Screen name='BottomTab' component={BottomTab} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>

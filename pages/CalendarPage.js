@@ -49,7 +49,7 @@ const CalendarPage = () =>{
     markedDay[selected] = {
       selected: true,
       disableTouchEvent: true,
-      selectedDotColor: 'orange',
+      // selectedDotColor: 'orange',
     }
   }
   const handleCalendarPress = (date) => {
@@ -94,32 +94,33 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'purple',
+    backgroundColor: '#800080',
   },
 
   // calendar styling
   calendarView: {
-    marginBottom: 10,
+    marginBottom: 20,
+    paddingTop: '10%',
   },
 
   // task info at the bottom of the calendar styling
   dayTaskView: {
     flexDirection: 'row',
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     marginBottom: 10,
     padding: 10,
-    backgroundColor: 'white',
-    borderWidth: 1,
+    backgroundColor: '#fbeed7',
   },
   dayTaskTitle: {
-    marginRight: 20,
+    marginLeft: 10,
+    marginRight: 30,
     fontSize: 20,
+    fontWeight: 'bold',
   },
-  
   dayTaskPrio: {
     fontSize: 20,
+    fontWeight: 'bold',
   },
-
 });
 
 export default CalendarPage;

@@ -18,8 +18,9 @@ import EditTaskForm from '../components/EditTaskForm';
 import AddTaskForm from '../components/AddTaskForm';
 import CheckList from '../components/Checklist';
 import Authentication from '../components/Authentication';
+import SortingTask from '../components/SortingTask';
 // https://icons8.com/icon/36389/menu (Menu) icon by https://icons8.com Icons8 (9 Mar 2024)
-import MenuImg from '../assets/Images/icons8-menu-50.png';
+// import MenuImg from '../assets/Images/icons8-menu-50.png';
 
 // Home Page of the task manager application
 function HomeScreen(){
@@ -71,12 +72,6 @@ function HomeScreen(){
             const parsedAllTaskData = JSON.parse(savedAllTaskData);
             setTaskAllInfo(parsedAllTaskData);
           }
-          // else if(savedAllTaskData)
-          // {
-          //   console.log('h');
-          //   const parsedAllTaskData = JSON.parse(savedAllTaskData);
-          //   setTaskAllInfo(parsedAllTaskData);
-          // }
       } catch (error) {
           console.error('Error in retrieving the saved checklist data:', error);
       }
@@ -106,6 +101,11 @@ function HomeScreen(){
         accessible={true} 
         accessibilityLabel='Home Page View'
       >
+        <SortingTask 
+          checkList={checkList} 
+          setCheckList={setCheckList}
+          setFormVisible={setFormVisible} 
+        />
         {/* tasks checklist added by the user container*/}
         <CheckList 
           tickVisible={tickVisible}
@@ -141,18 +141,6 @@ function HomeScreen(){
               setTickVisible={setTickVisible}
               setMainDueDate={setMainDueDate}
             />
-
-            {/* add task button to show the pop up form
-            <Pressable
-              accessible={true}
-              accessibilityLabel='Add Task Button'
-              onPress={()=> setFormVisible(true)}
-              style = {styles.popUpButton}
-            >
-              <Text style={styles.popUpButtonText}>
-                Add Task
-              </Text>
-            </Pressable> */}
             {/* <Pressable
               accessible={true}
               accessibilityLabel='Get Data'
@@ -249,7 +237,7 @@ const styles = StyleSheet.create({
   homePageView: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     backgroundColor: 'white',
   },
 

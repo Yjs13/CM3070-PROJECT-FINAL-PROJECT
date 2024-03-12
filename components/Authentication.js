@@ -60,12 +60,12 @@ const Authentication = () =>{
                         Continue
                     </Text>
                 </Pressable>
-                <Pressable style={styles.newUserButton} onPress={goToSetUpPage}>
+                <Pressable onPress={goToSetUpPage}>
                   <Text style={styles.newUserText}>
                     New User?
                   </Text>
                 </Pressable>
-                <Pressable style={styles.newUserButton} onPress={goToForgetPage}>
+                <Pressable  onPress={goToForgetPage}>
                   <Text style={styles.newUserText}>
                     Forget Password?
                   </Text>

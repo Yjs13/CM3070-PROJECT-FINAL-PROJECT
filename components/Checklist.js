@@ -163,14 +163,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
-        padding: 10,
+        padding: 7,
         backgroundColor: '#fbeed7',
         borderWidth: 1,
+        borderRadius: 2,
         borderColor: 'grey',
     },
     checkListText: {
-        marginLeft: 10,
-        fontSize: 18,
+        marginLeft: 8,
+        fontSize: 17,
         fontWeight: 'bold',
     },
     // priority Button styling
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
         borderColor: '#b9bcbf',
     },
     prioText: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
     },
@@ -192,6 +193,7 @@ const styles = StyleSheet.create({
     checkBox: {
         width: '8%',
         height: 30,
+        marginRight: 3,
         justifyContent: 'center',
         alignItems:'center',
         backgroundColor: 'white',

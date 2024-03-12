@@ -111,15 +111,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 10,
     backgroundColor: '#fbeed7',
+    borderRadius: 2,
   },
   dayTaskTitle: {
     marginLeft: 10,
     marginRight: 30,
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: 'bold',
   },
   dayTaskPrio: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: 'bold',
   },
 });

@@ -4,7 +4,7 @@
 // https://www.npmjs.com/package/@react-native-community/datetimepicker(28 Feb 2024)
 // Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
-import { StyleSheet, Text, TextInput, View, Modal, Pressable } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Modal, Pressable, Alert } from 'react-native';
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -65,6 +65,14 @@ const AddTaskForm = ({formVisible,setFormVisible,titleText,setTitleText,priority
         setDueDate(new Date());
         // set the priority back to '' after the new task is pressed
         setPriority('');
+
+        // reminder logic
+        if(dueDate.toISOString().split('T')[0] == new Date().toISOString().split('T')[0])
+        {
+          setTimeout(()=>{
+            Alert.alert('You have a task due today!!')
+          }, 3000)
+        }
     } catch(e){
         console.error(e);
     }
@@ -204,6 +212,7 @@ const styles = StyleSheet.create({
     {
         width: '60%',
         height: '15%',
+        backgroundColor: '#fbeed7',
     },
     // drop down button text
     dropButtonText:

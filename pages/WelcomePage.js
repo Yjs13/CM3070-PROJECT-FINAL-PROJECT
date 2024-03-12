@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     textAlign: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
   },
 
   welcomeView: {
@@ -73,8 +74,9 @@ const styles = StyleSheet.create({
     borderColor: '#800080',
   },
   title: {
-    fontSize: 20,
     marginBottom: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   infoView: {
     flexDirection: 'row',
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
   nextButtonText: {
     textAlign: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
   },
 });

@@ -243,19 +243,20 @@ const styles = StyleSheet.create({
     dropButton:
     {
         width: '50%',
+        height: '9%',
         backgroundColor: '#fbeed7',
     },
     // drop down button text
     dropButtonText:
     {
         textAlign: 'left',
-        fontSize: 18,
+        fontSize: 16,
     },
     // drop down row text
     dropRowText:
     {
         textAlign: 'left',
-        fontSize: 18,
+        fontSize: 16,
     },
 
     // due date button styling
@@ -268,7 +269,7 @@ const styles = StyleSheet.create({
     },
     dueDateText:
     {
-      fontSize: 18,
+      fontSize: 16,
     },
 
     // description text input styling

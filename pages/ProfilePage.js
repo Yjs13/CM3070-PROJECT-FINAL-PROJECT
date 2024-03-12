@@ -1,21 +1,82 @@
-import { StyleSheet, Text, View,Image,Pressable } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, Text, View, Image, Pressable,} from 'react-native';
 import { Cell, Section, TableView } from 'react-native-tableview-simple';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // Photo by Satyabratasm on Unsplash 
-import profileImg from '../assets/Images/satyabratasm-u_kMWN-BWyU-unsplash.jpg';
+// import profileImg from '../assets/Images/satyabratasm-u_kMWN-BWyU-unsplash.jpg';
+
+// components
+import EditProfilePage from '../components/EditProfile';
 
 const ProfilePage = () =>{
+  const [editFormVisible, setEditFormVisible] = useState(false);
+  const [userName, setUserName] = useState('Username');
+  // default img rabbit
+  const [profileImg, setProfileImg] = useState(require('../assets/Images/satyabratasm-u_kMWN-BWyU-unsplash.jpg'));
+  const [imgState, setImgState] = useState(true);
+  const [img1State, setImg1State] = useState(true);
+
+  useEffect(()=> {
+    const getSavedUserName = async()=> {
+      try{
+        const savedUsername = await AsyncStorage.getItem('username');
+        const savedProfileImg = await AsyncStorage.getItem('profileImg');
+  
+        if(savedUsername)
+        {
+          const parsedUsername = JSON.parse(savedUsername);
+          setUserName(parsedUsername);
+        }
+        if(savedProfileImg)
+        {
+          const parsedProfileImg = JSON.parse(savedProfileImg);
+          setProfileImg(parsedProfileImg);
+        }
+      }catch(error)
+      {
+        console.error(error);
+      }
+    }
+    getSavedUserName();
+  },[]);
+
+  const showEditForm=async()=> {
+    setEditFormVisible(true);
+
+    // gamification feature
+    // checks for the number of completed task
+    // if one completed task reward the user one extra img
+    const savedTicks = await AsyncStorage.getItem('ticks');
+    if(savedTicks)
+    {
+      const parsedTicks = JSON.parse(savedTicks);
+      let count = 0;
+      for(i=0; i<parsedTicks.length; i++)
+      {
+        if(parsedTicks[i])
+        {
+          count++;
+        }
+      }
+
+      if(count >= 5)
+      {
+        setImg1State(false);
+      }
+      else if(count >= 1)
+      {
+        setImgState(false);
+      }
+    }
+    setEditFormVisible(true);
+  }
 
   const navigation = useNavigation();
   const goToAboutPage = () => {
     // navigate to the about page
     navigation.navigate('About Us');
   };
-  const goToEditProfilePage = () =>{
-    // navigate to the edit profile page
-    navigation.navigate('Edit Profile');
-  };
-
 
   return (
     <View 
@@ -28,12 +89,21 @@ const ProfilePage = () =>{
           <Image source={profileImg} style={styles.profilePic}/>
         </View>
         <View>
-          <Text style={styles.nameText}>Soo Yit Jing</Text>
-          <Pressable style={styles.editButton} onPress={() => goToEditProfilePage()}>
+          <Text style={styles.nameText}>{userName}</Text>
+          <Pressable style={styles.editButton} onPress={() => showEditForm()}>
             <Text style={styles.editButtonText}>Edit Profile</Text>
           </Pressable>
         </View>
       </View>
+      <EditProfilePage
+        editFormVisible={editFormVisible}
+        setEditFormVisible={setEditFormVisible}
+        setUserName={setUserName}
+        profileImg={profileImg}
+        setProfileImg={setProfileImg}
+        imgState={imgState}
+        img1State={img1State}
+      />
       <TableView style={styles.table}>
         <Section header="Preferences" headerTextStyle={styles.headerText}>
           <Cell
@@ -66,7 +136,7 @@ const styles = StyleSheet.create({
     width:100,
     height:100,
     marginRight: 45,
-    borderRadius: 20,
+    borderRadius: 30,
   },
   profileInfo: {
     marginTop: '13%',

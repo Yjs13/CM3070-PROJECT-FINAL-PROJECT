@@ -25,7 +25,11 @@ const ForgetPass = () =>{
     },[])
 
     const showPassword = ()=> {
-        if(quizValue == passwordData[0][1])
+        if(passwordData == null)
+        {
+            Alert.alert('No password is saved');
+        }
+        else if(quizValue == passwordData[0][1])
         {
             setPassVisible(true);
         }

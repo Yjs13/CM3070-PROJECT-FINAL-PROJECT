@@ -4,7 +4,7 @@
 // Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Pressable, ScrollView, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -55,7 +55,8 @@ function HomeScreen(){
           const savedCheckListData = await AsyncStorage.getItem('checklist');
           const savedTickData = await AsyncStorage.getItem('ticks');
           const savedAllTaskData = await AsyncStorage.getItem('taskInfo');
-          if (savedCheckListData) {
+          if (savedCheckListData) 
+          {
             const parsedListData = JSON.parse(savedCheckListData);
             setCheckList(parsedListData);
             const parsedTickData = JSON.parse(savedTickData);
@@ -72,84 +73,86 @@ function HomeScreen(){
   }, []);
 
   return (
-    <View style={styles.container} >
-      <View 
-        style={styles.homePageView} 
-        accessible={true} 
-        accessibilityLabel='Home Page View'
-      >
-        <SortingTask 
-          checkList={checkList} 
-          setCheckList={setCheckList}
-        />
-        {/* tasks checklist added by the user container*/}
-        <CheckList 
-          tickVisible={tickVisible}
-          setTickVisible={setTickVisible}
-          setEditFormVisible={setEditFormVisible}
-          setEditFormInfo={setEditFormInfo}
-          setEditIndex={setEditIndex}
-          setTitleText={setTitleText}
-          setPriority={setPriority}
-          checkList={checkList}
-          setMainDueDate={setMainDueDate}
-          taskAllInfo={taskAllInfo}
-          setTimeFrame={setTimeFrame}
-          setDescpText={setDescpText}
-        />
-
-        {/* add tasks feature */}
-        <View>
-            {/* add task pop-up form */}
-            <AddTaskForm 
-              formVisible={formVisible} 
-              setFormVisible={setFormVisible} 
-              titleText={titleText} 
-              setTitleText={setTitleText}
-              priority={priority}
-              setPriority={setPriority}
-              priorities={priorities}
-              setCheckList={setCheckList}
-              setTickVisible={setTickVisible}
-              setMainDueDate={setMainDueDate}
-            />
-        </View>
-
-        {/* pop-up form to enable the user to edit the task */}
-        <EditTaskForm 
-          editFormVisible={editFormVisible} 
-          setEditFormVisible={setEditFormVisible} 
-          titleText={titleText} 
-          setTitleText={setTitleText}
-          priority={priority}
-          setPriority={setPriority}
-          priorities={priorities}
-          editFormInfo={editFormInfo}
-          checkList={checkList}
-          editIndex={editIndex}
-          mainDueDate={mainDueDate}
-          setMainDueDate={setMainDueDate}
-          timeFrames={timeFrames}
-          timeFrame={timeFrame}
-          setTimeFrame={setTimeFrame}
-          taskAllInfo={taskAllInfo}
-          descpText={descpText}
-          setDescpText={setDescpText}
-          tickVisible={tickVisible}
-        />
-        {/* add task button to show the pop up form */}
-        <Pressable
-          accessible={true}
-          accessibilityLabel='Add Task Button'
-          onPress={()=> setFormVisible(true)}
-          style = {styles.popUpButton}
+    <SafeAreaView style={styles.container} >
+      <ScrollView>
+        <View 
+          style={styles.homePageView} 
+          accessible={true} 
+          accessibilityLabel='Home Page View'
         >
-          <Text style={styles.popUpButtonText}>
-            +
-          </Text>
-        </Pressable>
-      </View>
-    </View>
+          <SortingTask 
+            checkList={checkList} 
+            setCheckList={setCheckList}
+          />
+          {/* tasks checklist added by the user container*/}
+          <CheckList 
+            tickVisible={tickVisible}
+            setTickVisible={setTickVisible}
+            setEditFormVisible={setEditFormVisible}
+            setEditFormInfo={setEditFormInfo}
+            setEditIndex={setEditIndex}
+            setTitleText={setTitleText}
+            setPriority={setPriority}
+            checkList={checkList}
+            setMainDueDate={setMainDueDate}
+            taskAllInfo={taskAllInfo}
+            setTimeFrame={setTimeFrame}
+            setDescpText={setDescpText}
+          />
+
+          {/* add tasks feature */}
+          <View>
+              {/* add task pop-up form */}
+              <AddTaskForm 
+                formVisible={formVisible} 
+                setFormVisible={setFormVisible} 
+                titleText={titleText} 
+                setTitleText={setTitleText}
+                priority={priority}
+                setPriority={setPriority}
+                priorities={priorities}
+                setCheckList={setCheckList}
+                setTickVisible={setTickVisible}
+                setMainDueDate={setMainDueDate}
+              />
+          </View>
+
+          {/* pop-up form to enable the user to edit the task */}
+          <EditTaskForm 
+            editFormVisible={editFormVisible} 
+            setEditFormVisible={setEditFormVisible} 
+            titleText={titleText} 
+            setTitleText={setTitleText}
+            priority={priority}
+            setPriority={setPriority}
+            priorities={priorities}
+            editFormInfo={editFormInfo}
+            checkList={checkList}
+            editIndex={editIndex}
+            mainDueDate={mainDueDate}
+            setMainDueDate={setMainDueDate}
+            timeFrames={timeFrames}
+            timeFrame={timeFrame}
+            setTimeFrame={setTimeFrame}
+            taskAllInfo={taskAllInfo}
+            descpText={descpText}
+            setDescpText={setDescpText}
+            tickVisible={tickVisible}
+          />
+        </View>
+      </ScrollView>
+      {/* add task button to show the pop up form */}
+      <Pressable
+        accessible={true}
+        accessibilityLabel='Add Task Button'
+        onPress={()=> setFormVisible(true)}
+        style = {styles.popUpButton}
+      >
+        <Text style={styles.popUpButtonText}>
+          +
+        </Text>
+      </Pressable>
+    </SafeAreaView>
   );
 }
 
@@ -193,13 +196,15 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height:'100%',
+    backgroundColor: 'white',
   },
 
   homePageView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    backgroundColor: 'white',
+    marginTop: '5%',
+    marginBottom: '15%',
   },
 
   //add task pop-up button styling

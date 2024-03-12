@@ -1,7 +1,7 @@
 // checklist component in the home page
 // Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
-import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Pressable, TouchableOpacity, Alert } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -38,6 +38,23 @@ const CheckList = ({tickVisible,setTickVisible,setEditFormVisible,setEditFormInf
         const savedTickData = await AsyncStorage.getItem('ticks');
         const parsedData = JSON.parse(savedTickData);
         setTickVisible(parsedData);
+        let count = 0;
+        for(i=0; i<parsedData.length; i++)
+        {
+            if(parsedData[i])
+            {
+            count++;
+            }
+        }
+
+        if(count == 5)
+        {
+            Alert.alert('You have unlock a new Profile Image!!');
+        }
+        else if(count == 1)
+        {
+            Alert.alert('You have unlock a new Profile Image!!');
+        }
     }
   }
 

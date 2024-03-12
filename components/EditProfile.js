@@ -35,56 +35,54 @@ const EditProfilePage = ({editFormVisible, setEditFormVisible, setUserName, prof
 
   return (
     <View>
-        <Modal 
-            visible={editFormVisible}
-            accessible={true}
-            accessibilityLabel='Edit Profile Form'
-            onRequestClose={() => {
-            setEditFormVisible(!editFormVisible)
-        }}>
-            <View style={styles.container}>
-                {/* profile picture */}
-                <View>
-                    <Image source={selectedImg} style={styles.profilePic}/>
-                </View>
+      <Modal 
+          visible={editFormVisible}
+          accessible={true}
+          accessibilityLabel='Edit Profile Form'
+          onRequestClose={() => {
+          setEditFormVisible(!editFormVisible)
+      }}>
+        <View style={styles.container}>
+          {/* profile picture */}
+          <View>
+            <Image source={selectedImg} style={styles.profilePic}/>
+          </View>
 
-                {/* picture choices */}
-                <View style={styles.imagesContainer}>
-                    <View style={styles.images}>
-                        <Pressable onPress={() => handleRabImgPress()}>
-                            <Image source={rabbitImg} style={styles.profilePics}/>
-                        </Pressable>
-                        <Pressable onPress={() => handleDogImgPress()} disabled={imgState}>
-                            <Image source={dogImg} style={styles.profilePics}/>
-                        </Pressable>
-                        <Pressable onPress={() => handleCatImgPress()} disabled={img1State}>
-                            <Image source={catImg} style={styles.profilePics}/>
-                        </Pressable>
-                    </View>
-                </View>
+          {/* picture choices */}
+          <View style={styles.images}>
+            <Pressable onPress={() => handleRabImgPress()}>
+              <Image source={rabbitImg} style={styles.profilePics}/>
+            </Pressable>
+            <Pressable onPress={() => handleDogImgPress()} disabled={imgState}>
+              <Image source={dogImg} style={styles.profilePics}/>
+            </Pressable>
+            <Pressable onPress={() => handleCatImgPress()} disabled={img1State}>
+              <Image source={catImg} style={styles.profilePics}/>
+            </Pressable>
+          </View>
 
-                {/* username input box */}
-                <TextInput 
-                    placeholder='Username'
-                    defaultValue= {nameText}
-                    style= {styles.textInputContainer}
-                    maxLength= {20}
-                    onChangeText= {nameText => setNameText(nameText)}
-                />
-                <View style={styles.buttonView}>
-                    <Pressable style={styles.buttonSave} onPress={() => saveEdit()}>
-                        <Text style={styles.buttonBoxText}>
-                            Save
-                        </Text>
-                    </Pressable>
-                    <Pressable style={styles.buttonCancel} onPress={() => setEditFormVisible(false)}>
-                        <Text style={styles.buttonBoxText}>
-                            Cancel
-                        </Text>
-                    </Pressable>
-                </View>
-            </View>
-        </Modal>
+          {/* username input box */}
+          <TextInput 
+            placeholder='Username'
+            defaultValue= {nameText}
+            style= {styles.textInputContainer}
+            maxLength= {20}
+            onChangeText= {nameText => setNameText(nameText)}
+          />
+          <View style={styles.buttonView}>
+            <Pressable style={styles.buttonSave} onPress={() => saveEdit()}>
+              <Text style={styles.buttonBoxText}>
+                Save
+              </Text>
+            </Pressable>
+            <Pressable style={styles.buttonCancel} onPress={() => setEditFormVisible(false)}>
+              <Text style={styles.buttonBoxText}>
+                Cancel
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -104,9 +102,6 @@ const styles = StyleSheet.create({
     height:100,
     marginVertical: 30,
     borderRadius: 30,
-  },
-  imagesContainer: {
-
   },
   images: {
     flexDirection: 'row',

@@ -10,9 +10,11 @@ const Link = ({url}) => {
     // checks whether the link is support
     const supported = await Linking.canOpenURL(url);
 
-    if (supported) {
+    if (supported) 
+    {
       await Linking.openURL(url);
-    } else {
+    } else 
+    {
       Alert.alert(`URL is not supported: ${url}`);
     }
   }, [url]);
@@ -26,6 +28,7 @@ const Link = ({url}) => {
   )
 }
 
+// simple description of my application
 const AboutUsPage = () =>{
   return (
     <View 

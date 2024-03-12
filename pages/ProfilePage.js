@@ -11,6 +11,12 @@ const ProfilePage = () =>{
     // navigate to the about page
     navigation.navigate('About Us');
   };
+  const goToEditProfilePage = () =>{
+    // navigate to the edit profile page
+    navigation.navigate('Edit Profile');
+  };
+
+
   return (
     <View 
       style={styles.container}
@@ -23,7 +29,7 @@ const ProfilePage = () =>{
         </View>
         <View>
           <Text style={styles.nameText}>Soo Yit Jing</Text>
-          <Pressable style={styles.editButton}>
+          <Pressable style={styles.editButton} onPress={() => goToEditProfilePage()}>
             <Text style={styles.editButtonText}>Edit Profile</Text>
           </Pressable>
         </View>
@@ -59,11 +65,12 @@ const styles = StyleSheet.create({
   profilePic: {
     width:100,
     height:100,
-    marginRight: 20,
+    marginRight: 45,
     borderRadius: 20,
   },
   profileInfo: {
-    marginTop: '20%',
+    marginTop: '13%',
+    marginBottom: 10,
     flexDirection: 'row', 
     justifyContent: 'center'
   },

@@ -70,6 +70,7 @@ const CalendarPage = () =>{
     >
       <Calendar
         style={styles.calendarView}
+        theme={{todayTextColor: 'orange'}}
         // set the calendar to show the user current date
         current={currentDate.toISOString().split('T')[0]}
         // Callback that gets called when the user selects a day

@@ -4,7 +4,7 @@
 // Adapt from 2024 React Native Community
 // https://react-native-async-storage.github.io/async-storage/docs/usage (29 Feb 2024)
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Pressable, ScrollView, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, Pressable, ScrollView, SafeAreaView, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -63,6 +63,22 @@ function HomeScreen(){
             setTickVisible(parsedTickData);
             const parsedAllTaskData = JSON.parse(savedAllTaskData);
             setTaskAllInfo(parsedAllTaskData);
+          }
+
+          // reminder feature
+          // checks whether the task's due date is the current date
+          if(checkList != null)
+          {
+            for(i=0;i<checkList.length;i++)
+            {
+              const date = checkList[i][2];
+              if(date.split('T')[0] == new Date().toISOString().split('T')[0])
+              {
+                setTimeout(()=>{
+                  Alert.alert('You have a task due today!!')
+                }, 3000)
+              }
+            }
           }
       } catch (error) {
           console.error('Error in retrieving the saved checklist data:', error);

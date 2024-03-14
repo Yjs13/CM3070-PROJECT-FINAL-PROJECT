@@ -35,10 +35,11 @@ const SortingTask = ({checkList, setCheckList}) =>{
         High: 3
     };
 
-    // sorting algorthim to sort the task in the checklist
-    const sortWithPrio = (sort)=> {
+    // sorting algorthim to sort the task in the checklist according to the priority
+    const prioritySorting = (sort)=> {
         // to set color to the selected text
         setSelectedOption(sort);
+        // to sort the task according to the descending order of the priority (High, medium, low)
         const sortedTasks = saveData.sort((a, b) => {
             const priorityA = priorityValues[a[1]];
             const priorityB = priorityValues[b[1]];
@@ -48,7 +49,7 @@ const SortingTask = ({checkList, setCheckList}) =>{
     }
     // sorting algorithm to sort the task according to the due date
     // the closer the due date from the current date the higher the priority of the task
-    const sortWithDueDate = (sort)=> {
+    const dueDateSorting = (sort)=> {
         // to set color to the selected text
         setSelectedOption(sort);
         const sortedTasks = saveData.sort((a, b) => {
@@ -84,12 +85,12 @@ const SortingTask = ({checkList, setCheckList}) =>{
         }}>
             <View>
                 <View style={styles.formContainer}>
-                    <Pressable style={styles.sortingView} onPress={()=>sortWithPrio('priority')}>
+                    <Pressable style={styles.sortingView} onPress={()=>prioritySorting('priority')}>
                         <Text style={[styles.sortingText, selectedOption === 'priority' && styles.selectedSort]}>
                             Sorting by Priority
                         </Text>
                     </Pressable>
-                    <Pressable style={styles.sortingView} onPress={()=>sortWithDueDate('dueDate')}>
+                    <Pressable style={styles.sortingView} onPress={()=>dueDateSorting('dueDate')}>
                         <Text style={[styles.sortingText, selectedOption === 'dueDate' && styles.selectedSort]}>
                             Sorting by Due Date
                         </Text>

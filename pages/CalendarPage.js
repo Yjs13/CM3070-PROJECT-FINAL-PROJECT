@@ -13,7 +13,7 @@ const CalendarPage = () =>{
   // to set the state of the selected day
   const [selected, setSelected] = useState('');
   // to set the current date of the user
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const currentDate = new Date();
 
   // to set the saved checklist task info
   const [tasks, setTask] = useState([]);
@@ -30,6 +30,7 @@ const CalendarPage = () =>{
         const savedCheckListData = await AsyncStorage.getItem('checklist');
         const parsedListData = JSON.parse(savedCheckListData);
         setTask(parsedListData);
+
         // from the checklist retrieve the date value
         const taskD = parsedListData.map(task => task[2].split('T')[0]);
         setTaskDates(taskD);

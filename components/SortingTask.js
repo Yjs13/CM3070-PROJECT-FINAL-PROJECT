@@ -41,21 +41,22 @@ const SortingTask = ({checkList, setCheckList}) =>{
         setSelectedOption(sort);
         // to sort the task according to the descending order of the priority (High, medium, low)
         const sortedTasks = saveData.sort((a, b) => {
-            const priorityA = priorityValues[a[1]];
-            const priorityB = priorityValues[b[1]];
-            return priorityB - priorityA;
+            const taskAPriority = priorityValues[a[1]];
+            const taskBPriority = priorityValues[b[1]];
+            return taskBPriority - taskAPriority;
         });
         setCheckList(sortedTasks);
     }
+
     // sorting algorithm to sort the task according to the due date
     // the closer the due date from the current date the higher the priority of the task
     const dueDateSorting = (sort)=> {
         // to set color to the selected text
         setSelectedOption(sort);
         const sortedTasks = saveData.sort((a, b) => {
-            const priorityA = priorityValues[new Date(a[2]).toISOString().split('T')[0]];
-            const priorityB = priorityValues[new Date(b[2]).toISOString().split('T')[0]];
-            return priorityA - priorityB;
+            const taskAPriority = new Date(a[2]);
+            const taskBPriority = new Date(b[2]);
+            return taskAPriority - taskBPriority;
         });
         setCheckList(sortedTasks);
     }
